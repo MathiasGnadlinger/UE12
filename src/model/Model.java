@@ -1,11 +1,23 @@
 package model;
 
+import javafx.fxml.FXML;
+import javafx.scene.control.TextField;
+
+import java.util.Scanner;
+/**
+ * @author Mathias Gnadlinger
+ * @version 12, 26.01.2021
+ */
 public class Model
 {
     private ModularCounter red;
     private ModularCounter green;
     private ModularCounter blue;
     private String hex;
+
+    @FXML private TextField tf_RED_Input;
+    @FXML private TextField tf_GREEN_Input;
+    @FXML private TextField tf_BLUE_Input;
 
 
     public Model() {
@@ -31,7 +43,40 @@ public class Model
 
     public String getHex()
     {
-        hex = String.format("#%02x%02x%02x", red.getValue(), green.getValue(), blue.getValue()).toUpperCase();
+        int red = getRed();
+        String hexRed = Integer.toHexString(red);
+        int green = getGreen();
+        String hexGreen = Integer.toHexString(green);
+        int blue = getBlue();
+        String hexBlue = Integer.toHexString(blue);
+
+        if (hexRed.length() != 2)
+        {
+            hexRed = "0" + hexRed;
+        }
+        else
+        {
+            hexRed = hexRed;
+        }
+        if (hexGreen.length() != 2)
+        {
+            hexGreen = "0" + hexGreen;
+        }
+        else
+        {
+            hexRed = hexGreen;
+        }
+        if (hexBlue.length() != 2)
+        {
+            hexBlue = "0" + hexBlue;
+        }
+        else
+        {
+            hexRed = hexBlue;
+        }
+
+        hex ="#" + hexRed + hexGreen + hexBlue;
+
         return hex;
     }
 
@@ -113,13 +158,90 @@ public class Model
 
     }
 
-
-    @Override
-    public String toString()
+    public static void main(String[] args)
     {
-        return "Model" +
-                "red = " + red +
-                ", green = " + green +
-                ", blue = " + blue;
+        Model model = new Model();
+        ColorCode colorCode = ColorCode.RED;
+        boolean isCorrect;
+        System.out.printf("Color - Calculator");
+
+
+        while(true)
+        {
+            Scanner scanner = new Scanner(System.in);
+            System.out.println("Auswahl: ");
+            System.out.println("A -> Absolut Color Change \nB -> Relativ Color Change \nC -> View values \nD -> Stop!");
+            System.out.println("\nYour wish!: ");
+
+            String inputWish = scanner.next();
+
+            switch (inputWish)
+            {
+                case "A":
+                    System.out.printf("Please Enter your color (r,g,b):");
+                    String rgbA = scanner.next();
+                    isCorrect = true;
+                    switch (rgbA)
+                    {
+                        case "r":
+                            colorCode = ColorCode.RED;
+                            break;
+                        case "g":
+                            colorCode = ColorCode.GREEN;
+                            break;
+                        case "b":
+                            colorCode = ColorCode.BLUE;
+                            break;
+                    }
+                    if (isCorrect)
+                    {
+                        System.out.printf("Enter value:");
+                        model.changeColorViaAbsoluteValue(colorCode, scanner.nextInt());
+                        System.out.println("Red: " + model.red);
+                        System.out.println("Green: " + model.green);
+                        System.out.println("Blue: " + model.blue);
+                    }
+                    break;
+
+                case "B":
+                    System.out.printf("Please Enter your color (r,g,b): ");
+                    String rgbR = scanner.next();
+                    isCorrect = true;
+                    switch (rgbR)
+                    {
+                        case "r":
+                            colorCode = ColorCode.RED;
+                            break;
+                        case "g":
+                            colorCode = ColorCode.GREEN;
+                            break;
+                        case "b":
+                            colorCode = ColorCode.BLUE;
+                            break;
+                    }
+                    if (isCorrect)
+                    {
+                        System.out.printf("Enter value: ");
+                        model.changeColorViaRelativeValue(colorCode, scanner.nextInt());
+                        System.out.println("Red: " + model.red);
+                        System.out.println("Green: " + model.green);
+                        System.out.println("Blue: " + model.blue);
+                    }
+                    break;
+
+                case "C":
+                {
+                    System.out.println("Red: " + model.red);
+                    System.out.println("Green: " + model.green);
+                    System.out.println("Blue: " + model.blue);
+                    System.out.println("Hex: " + model.getHex());
+                }
+                    break;
+                case "D":
+                {
+                    System.out.printf("See u soon\n");
+                }
+            }
+        }
     }
 }

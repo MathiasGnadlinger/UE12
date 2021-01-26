@@ -5,7 +5,10 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-
+/**
+ * @author Mathias Gnadlinger
+ * @version 12, 26.01.2021
+ */
 public class Main extends Application
 {
 

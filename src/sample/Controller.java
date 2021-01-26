@@ -2,15 +2,14 @@ package sample;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import model.ColorCode;
 import model.Model;
-
-import java.net.URL;
-import java.util.ResourceBundle;
-
+/**
+ * @author Mathias Gnadlinger
+ * @version 12, 26.01.2021
+ */
 public class Controller
 {
     private Model model;
@@ -21,56 +20,50 @@ public class Controller
     @FXML private TextField tf_HEX_Output;
 
     @FXML private Button btn_Color_Output;
-    @FXML private Button btn_REDpl;
-    @FXML private Button btn_REDmi;
-    @FXML private Button btn_GREENpl;
-    @FXML private Button btn_GREENmi;
-    @FXML private Button btn_BLUEpl;
-    @FXML private Button btn_BLUEmi;
 
 
     @FXML
     public void AddRed(ActionEvent event)
     {
-        model.changeColorViaAbsoluteValue(ColorCode.RED,10);
-        tf_BLUE_Input.setText(Integer.toString(model.getRed()));
-        hex();
+        model.changeColorViaRelativeValue(ColorCode.RED,10);
+        tf_RED_Input.setText(Integer.toString(model.getRed()));
+        ShowHex();
     }
 
     public void AddGreen(ActionEvent event)
     {
-        model.changeColorViaAbsoluteValue(ColorCode.GREEN,10);
-        tf_BLUE_Input.setText(Integer.toString(model.getGreen()));
-        hex();
+        model.changeColorViaRelativeValue(ColorCode.GREEN,10);
+        tf_GREEN_Input.setText(Integer.toString(model.getGreen()));
+        ShowHex();
     }
 
     public void AddBlue()
     {
-        model.changeColorViaAbsoluteValue(ColorCode.BLUE,10);
+        model.changeColorViaRelativeValue(ColorCode.BLUE,10);
         tf_BLUE_Input.setText(Integer.toString(model.getBlue()));
-        hex();
+        ShowHex();
     }
 
 
     public void SubRed()
     {
-        model.changeColorViaAbsoluteValue(ColorCode.RED,-10);
-        tf_BLUE_Input.setText(Integer.toString(model.getRed()));
-        hex();
+        model.changeColorViaRelativeValue(ColorCode.RED,-10);
+        tf_RED_Input.setText(Integer.toString(model.getRed()));
+        ShowHex();
     }
 
     public void SubGreen()
     {
-        model.changeColorViaAbsoluteValue(ColorCode.GREEN,-10);
+        model.changeColorViaRelativeValue(ColorCode.GREEN,-10);
         tf_BLUE_Input.setText(Integer.toString(model.getGreen()));
-        hex();
+        ShowHex();
     }
 
     public void SubBlue()
     {
-        model.changeColorViaAbsoluteValue(ColorCode.BLUE,-10);
+        model.changeColorViaRelativeValue(ColorCode.BLUE,-10);
         tf_BLUE_Input.setText(Integer.toString(model.getBlue()));
-        hex();
+        ShowHex();
     }
 
 
@@ -79,33 +72,34 @@ public class Controller
     {
         model.changeColorViaAbsoluteValue(ColorCode.RED, tf_RED_Input.getText());
         tf_RED_Input.setText(Integer.toString(model.getRed()));
-        hex();
+        ShowHex();
     }
     @FXML
     public void Green(ActionEvent event)
     {
         model.changeColorViaAbsoluteValue(ColorCode.GREEN, tf_GREEN_Input.getText());
-        tf_RED_Input.setText(Integer.toString(model.getGreen()));
-        hex();
+        tf_GREEN_Input.setText(Integer.toString(model.getGreen()));
+        ShowHex();
     }
     @FXML
     public void Blue(ActionEvent event)
     {
         model.changeColorViaAbsoluteValue(ColorCode.BLUE, tf_BLUE_Input.getText());
-        tf_RED_Input.setText(Integer.toString(model.getBlue()));
-        hex();
+        tf_BLUE_Input.setText(Integer.toString(model.getBlue()));
+        ShowHex();
     }
 
 
-
-    private void hex()
+    @FXML
+    private void ShowHex()
     {
         tf_HEX_Output.setText(model.getHex());
         btn_Color_Output.setStyle("-fx-background-color: " + model.getHex() + ";");
     }
 
     @FXML
-    public void initialize(){
+    public void initialize()
+    {
         model = new Model();
     }
 }
