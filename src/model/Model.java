@@ -1,9 +1,5 @@
 package model;
 
-import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
-
 public class Model
 {
     private ModularCounter red;
@@ -11,18 +7,11 @@ public class Model
     private ModularCounter blue;
     private String hex;
 
-    @FXML private TextField tf_RED_Input;
-    @FXML private TextField tf_GREEN_Input;
-    @FXML private TextField tf_BLUE_Input;
-    @FXML private TextField tf_HEX_Output;
-    @FXML private Button btn_Color_Output;
 
-
-    public Model(ModularCounter red, ModularCounter green, ModularCounter blue)
-    {
-        this.red = red;
-        this.green = green;
-        this.blue = blue;
+    public Model() {
+        red = new ModularCounter(256);
+        green = new ModularCounter(256);
+        blue = new ModularCounter(256);
     }
 
     public int getRed()
@@ -40,18 +29,9 @@ public class Model
         return blue.getValue();
     }
 
-    public String getHex(String hex)
+    public String getHex()
     {
-        int red = Integer.parseInt(tf_RED_Input.getText());
-        String hexRed = Integer.toHexString(red);
-        int green = Integer.parseInt(tf_GREEN_Input.getText());
-        String hexGreen = Integer.toHexString(green);
-        int blue = Integer.parseInt(tf_BLUE_Input.getText());
-        String hexBlue = Integer.toHexString(blue);
-
-        hex = hexRed + hexGreen + hexBlue;
-        System.out.printf(" Hexadezimal: %c%c%c ", hexRed,hexGreen,hexBlue);
-
+        hex = String.format("#%02x%02x%02x", red.getValue(), green.getValue(), blue.getValue()).toUpperCase();
         return hex;
     }
 
@@ -133,11 +113,6 @@ public class Model
 
     }
 
-
-    public static void main(String[] args)
-    {
-        System.out.printf("UE12 - ColorCalculaor");
-    }
 
     @Override
     public String toString()

@@ -65,10 +65,10 @@
             <Font size="24.0" />
          </font>
       </Label>
-      <TextField fx:id="tf_RED_Input" prefHeight="91.0" prefWidth="300.0" promptText="255" GridPane.rowIndex="1" />
-      <TextField fx:id="tf_GREEN_Input" prefHeight="93.0" prefWidth="300.0" promptText="0" GridPane.rowIndex="3" />
-      <TextField fx:id="tf_BLUE_Input" prefHeight="117.0" prefWidth="300.0" promptText="255" GridPane.rowIndex="5" />
+      <TextField fx:id="tf_RED_Input" onAction="#Red" prefHeight="91.0" prefWidth="300.0" promptText="255" GridPane.rowIndex="1" />
+      <TextField fx:id="tf_GREEN_Input" onAction="#Green" prefHeight="93.0" prefWidth="300.0" promptText="0" GridPane.rowIndex="3" />
+      <TextField fx:id="tf_BLUE_Input" onAction="#Blue" prefHeight="117.0" prefWidth="300.0" promptText="255" GridPane.rowIndex="5" />
       <Button fx:id="btn_Color_Output" mnemonicParsing="false" prefHeight="93.0" prefWidth="344.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-      <TextField fx:id="tf_HEX_OOutput" editable="false" promptText="FF00FF" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+      <TextField fx:id="tf_HEX_Output" editable="false" promptText="FF00FF" GridPane.columnIndex="2" GridPane.rowIndex="4" />
    </children>
 </GridPane>
